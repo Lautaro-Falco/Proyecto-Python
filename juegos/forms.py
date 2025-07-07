@@ -1,13 +1,19 @@
 from django import forms
-from .models import Plataforma, Videojuego, Reseña
-
-class PlataformaForm(forms.ModelForm):
-    class Meta:
-        model = Plataforma
-        fields = '__all__'
+from .models import Videojuego, Consola, Reseña
 
 class VideojuegoForm(forms.ModelForm):
     class Meta:
         model = Videojuego
-        fields = '__all__'
+        fields = ['titulo', 'genero']
+
+class ConsolaForm(forms.ModelForm):
+    class Meta:
+        model = Consola
+        fields = ['nombre', 'empresa']
+
+class ReseñaForm(forms.ModelForm):
+    class Meta:
+        model = Reseña
+        fields = ['usuario', 'comentario', 'puntaje']
+
 
