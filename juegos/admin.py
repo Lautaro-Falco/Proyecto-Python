@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Plataforma, Videojuego
+from .models import Consola, Videojuego, Reseña
 
-admin.site.register(Plataforma)
+admin.site.register(Consola)
 admin.site.register(Videojuego)
+admin.site.register(Reseña)
 
