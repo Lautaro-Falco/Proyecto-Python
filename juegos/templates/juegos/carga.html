@@ -3,19 +3,19 @@
 
 {% block tittle_text %}Carga{% endblock tittle_text %}
 {% block h1_text %}Carga{% endblock h1_text %}
-{% block p_text %}Acá podrá cargar sus videojuegos, desarrolladores y reseñas{% endblock p_text %}
+{% block p_text %}Seleccione qué desea cargar en su base de datos.{% endblock p_text %}
 
 {% block content %}
 <div class="container text-center mt-5">
     <div class="row justify-content-center">
         <div class="col-md-4 mb-3">
-            <a href="{% url 'juegos:cargar_videojuego' %}" class="btn btn-primary btn-lg w-100">Cargar Videojuego</a>
+            <a href="{% url 'juegos:cargar_videojuego' %}" class="btn btn-primary btn-lg w-100"style="background-color:#f4623a; color: white;border-color:#f4623a;">Cargar Videojuego</a>
         </div>
         <div class="col-md-4 mb-3">
-            <a href="{% url 'juegos:cargar_desarrollador' %}" class="btn btn-success btn-lg w-100">Cargar Desarrollador</a>
+            <a href="{% url 'juegos:cargar_desarrollador' %}" class="btn btn-success btn-lg w-100"style="background-color:#198754; color: white;border-color:#198754;">Cargar Desarrollador</a>
         </div>
         <div class="col-md-4 mb-3">
-            <a href="{% url 'juegos:cargar_resena' %}" class="btn btn-warning btn-lg w-100">Cargar Reseña</a>
+            <a href="{% url 'juegos:cargar_resena' %}" class="btn btn-warning btn-lg w-100"style="background-color: #ffc107; color: black;border-color:#ffc107;">Cargar Reseña</a>
         </div>
     </div>
 </div>

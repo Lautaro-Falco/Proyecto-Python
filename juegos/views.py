@@ -60,3 +60,73 @@ def detalle_videojuego(request, id):
     juego = Videojuego.objects.get(id=id)
     reseñas = Reseña.objects.filter(videojuego=juego)
     return render(request, 'juegos/detalle_videojuego.html', {'juego': juego, 'reseñas': reseñas})
+
+def eliminar(request):
+    return render(request, 'juegos/eliminar.html')
+
+def eliminar_videojuego(request):
+    videojuegos = Videojuego.objects.all()
+    return render(request, 'juegos/eliminar_videojuego.html', {'videojuegos': videojuegos})
+
+def borrar_videojuego(request, id):
+    juego = Videojuego.objects.get(id=id)
+    juego.delete()
+    return redirect('juegos/eliminar_videojuego')
+
+def eliminar_desarrollador(request):
+    desarrolladores = Desarrollador.objects.all()
+    return render(request, 'juegos/eliminar_desarrollador.html', {'desarrolladores': desarrolladores})
+
+def borrar_desarrollador(request, id):
+    desarrollador = Desarrollador.objects.get(id=id)
+    desarrollador.delete()
+    return redirect('juegos/eliminar_desarrollador')
+
+def eliminar_resena(request):
+    resenas = Reseña.objects.all()
+    return render(request, 'juegos/eliminar_resena.html', {'resenas': resenas})
+
+def borrar_resena(request, id):
+    resena = Reseña.objects.get(id=id)
+    resena.delete()
+    return redirect('juegos/eliminar_resena')
+
+def actualizar(request):
+    return render(request, 'juegos/actualizar.html')
+
+def actualizar_videojuego(request):
+    videojuegos = Videojuego.objects.all()
+    return render(request, 'juegos/actualizar_videojuego.html', {'videojuegos': videojuegos})
+
+def editar_videojuego(request, id):
+    juego = Videojuego.objects.get(id=id)
+    form = VideojuegoForm(request.POST or None, instance=juego)
+    if form.is_valid():
+        form.save()
+        return redirect('juegos:actualizar_videojuego')
+    return render(request, 'juegos/editar_videojuego.html', {'form': form})
+
+def actualizar_desarrollador(request):
+    desarrolladores = Desarrollador.objects.all()
+    return render(request, 'juegos/actualizar_desarrollador.html', {'desarrolladores': desarrolladores})
+
+def editar_desarrollador(request, id):
+    desarrollador = Desarrollador.objects.get(id=id)
+    form = DesarrolladorForm(request.POST or None, instance=desarrollador)
+    if form.is_valid():
+        form.save()
+        return redirect('juegos:actualizar_desarrollador')
+    return render(request, 'juegos/editar_desarrollador.html', {'form': form})
+
+def actualizar_resena(request):
+    resenas = Reseña.objects.all()
+    return render(request, 'juegos/actualizar_resena.html', {'resenas': resenas})
+
+def editar_resena(request, id):
+    resena = Reseña.objects.get(id=id)
+    form = ReseñaForm(request.POST or None, instance=resena)
+    if form.is_valid():
+        form.save()
+        return redirect('juegos:actualizar_resena')
+    return render(request, 'juegos/editar_resena.html', {'form': form})
+

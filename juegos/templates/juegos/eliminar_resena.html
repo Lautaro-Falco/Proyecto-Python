@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block tittle_text %}Eliminar Reseña{% endblock tittle_text %}
+{% block h1_text %}Eliminar Reseña{% endblock h1_text %}
+{% block p_text %}Seleccione qué reseña desea eliminar.{% endblock p_text %}
+
+{% block content %}
+<div class="container mt-5">
+    <ul class="list-group">
+        {% for resena in resenas %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ resena.usuario }}: "{{ resena.comentario|truncatechars:50 }}" - {{ resena.puntaje }}/10
+                <a href="{% url 'juegos:borrar_resena' resena.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No hay reseñas cargadas.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

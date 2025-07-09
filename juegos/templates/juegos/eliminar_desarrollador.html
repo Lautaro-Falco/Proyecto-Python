@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block tittle_text %}Eliminar Desarrollador{% endblock tittle_text %}
+{% block h1_text %}Eliminar Desarrollador{% endblock h1_text %}
+{% block p_text %}Seleccione qué desarrollador desea eliminar.{% endblock p_text %}
+
+{% block content %}
+<div class="container mt-5">
+    <ul class="list-group">
+        {% for dev in desarrolladores %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {{ dev.nombre }} ({{ dev.pais }})
+                <a href="{% url 'juegos:borrar_desarrollador' dev.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No hay desarrolladores cargados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
