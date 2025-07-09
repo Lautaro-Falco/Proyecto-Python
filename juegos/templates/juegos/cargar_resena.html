@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block tittle_text %}Cargar Reseña{% endblock tittle_text %}
+{% block h1_text %}Nueva Reseña{% endblock h1_text %}
+{% block p_text %}Comentá qué te pareció un videojuego y asignale un puntaje{% endblock p_text %}
+
+{% block content %}
+<div class="container mt-4">
+    {% if mensaje %}
+      <div class="alert alert-success text-center">
+        {{ mensaje }}
+      </div>
+    {% endif %}
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-warning btn-lg mt-3">Guardar Reseña</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

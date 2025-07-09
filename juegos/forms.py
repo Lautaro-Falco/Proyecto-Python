@@ -1,19 +1,25 @@
 from django import forms
-from .models import Videojuego, Consola, Reseña
+from .models import Videojuego, Desarrollador, Reseña
 
 class VideojuegoForm(forms.ModelForm):
     class Meta:
         model = Videojuego
-        fields = ['titulo', 'genero']
+        fields = ['titulo', 'genero', 'consola', 'desarrollador']
 
-class ConsolaForm(forms.ModelForm):
+class DesarrolladorForm(forms.ModelForm):
     class Meta:
-        model = Consola
-        fields = ['nombre', 'empresa']
+        model = Desarrollador
+        fields = ['nombre', 'pais']
 
 class ReseñaForm(forms.ModelForm):
     class Meta:
         model = Reseña
-        fields = ['usuario', 'comentario', 'puntaje']
+        fields = ['usuario', 'videojuego', 'comentario', 'puntaje']
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['puntaje'].widget.attrs.update({'min': 1, 'max': 10})
+
+
 
 

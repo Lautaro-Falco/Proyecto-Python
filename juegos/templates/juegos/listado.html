@@ -1,7 +1,31 @@
 {% extends "base.html" %}
 
 {% block tittle_text %}Listado{% endblock tittle_text %}
-
 {% block h1_text %}Listado{% endblock h1_text %}
+{% block p_text %}Acá podrá ver y filtrar todos los videojuegos disponibles{% endblock p_text %}
 
-{% block p_text %}Aca podra ver y filtrar un listado con todos los videojuegos y plataformas{% endblock p_text %}
+{% block content %}
+<div class="container mt-4">
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="nombre" class="form-control" placeholder="Buscar por nombre..." value="{{ query }}">
+            <button type="submit" class="btn btn-outline-primary">Buscar</button>
+        </div>
+    </form>
+
+    <div class="row">
+        {% for juego in videojuegos %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ juego.titulo }}</h5>
+                    <a href="{% url 'juegos:detalle_videojuego' juego.id %}" class="btn btn-sm btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No se encontraron videojuegos con ese nombre.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

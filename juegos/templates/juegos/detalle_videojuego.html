@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block tittle_text %}{{ juego.nombre }}{% endblock tittle_text %}
+{% block h1_text %}{{ juego.titulo }}{% endblock h1_text %}
+{% block p_text %}Detalle completo del videojuego{% endblock p_text %}
+
+{% block content %}
+<div class="text-white-75 mb-4">
+    <p><strong>Género:</strong> {{ juego.genero }}</p>
+    <p><strong>Desarrollador:</strong> {{ juego.desarrollador.nombre }}</p>
+    <p><strong>País de desarrollo:</strong> {{ juego.desarrollador.pais }}</p>
+    <hr>
+    <h4>Reseñas</h4>
+    {% for r in reseñas %}
+      <div class="border p-3 mb-3">
+        <p><strong>Usuario:</strong> {{ r.usuario }}</p>
+        <p><strong>Puntaje:</strong> {{ r.puntaje }}/10</p>
+        <p>{{ r.comentario }}</p>
+      </div>
+    {% empty %}
+      <p>No hay reseñas aún.</p>
+    {% endfor %}
+</div>
+{% endblock %}
