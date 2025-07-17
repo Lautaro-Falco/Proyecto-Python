@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block tittle_text %}Registro{% endblock tittle_text %}
+{% block h1_text %}Registro{% endblock h1_text %}
+{% block p_text %}Ingresá sus datos para registrarse{% endblock p_text %}
+
+{% block content %}
+<div class="container mt-4">
+  <form method="post">
+    {% csrf_token %}
+    {{ formulario.as_p }}
+    <button type="submit" class="btn btn-primary">Registrarse</button>
+  </form>
+</div>
+{% endblock %}
+
+

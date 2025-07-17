@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block tittle_text %}Tu Perfil{% endblock %}
+{% block h1_text %}Bienvenido {{ usuario.username }}{% endblock %}
+{% block p_text %}Mi Perfil{% endblock p_text %}
+
+{% block content %}
+<div class="container mt-4 text-white">
+  <ul class="list-group">
+    <li class="list-group-item bg-dark text-white">Nombre: {{ usuario.first_name }}</li>
+    <li class="list-group-item bg-dark text-white">Apellido: {{ usuario.last_name }}</li>
+    <li class="list-group-item bg-dark text-white">Edad: {{ perfil.edad }}</li>
+    <li class="list-group-item bg-dark text-white">Género favorito: {{ perfil.genero_favorito }}</li>
+    <li class="list-group-item bg-dark text-white">Usuario: {{ usuario.username }}</li>
+    <li class="list-group-item bg-dark text-white">Email: {{ usuario.email }}</li>
+    <a href="{% url 'usuarios:editar' %}" class="btn btn-warning px-4">Editar perfil</a>
+  </ul>
+</div>
+{% endblock %}

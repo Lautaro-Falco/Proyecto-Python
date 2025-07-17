@@ -28,11 +28,32 @@
                 <a class="navbar-brand" href={% url "juegos:inicio" %}>Inicio</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ms-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link" href={% url "juegos:carga" %} >Carga</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "juegos:actualizar" %} >Actualizar</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "juegos:eliminar" %}>Eliminar</a></li>
-                        <li class="nav-item"><a class="nav-link" href={% url "juegos:listado" %}>Listado</a></li>
+                    <!-- Bloque central para acciones -->
+                    <ul class="navbar-nav mx-auto">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'juegos:carga' %}">Carga</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'juegos:actualizar' %}">Actualizar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'juegos:eliminar' %}">Eliminar</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'juegos:listado' %}">Listado</a></li>
+                        {% endif %}
+                    </ul>
+
+                    <!-- Bloque derecho para sesión -->
+                    <ul class="navbar-nav ms-auto">
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item d-flex align-items-center">
+                                <a class="nav-link text-white me-3 fw-bold" href="{% url 'usuarios:detalle' %}">{{ request.user.username }}</a>
+                                <form method="post" action="{% url 'usuarios:logout' %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger px-3 py-2 text-white">Cerrar sesión</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="btn btn-primary ms-2" href="{% url 'usuarios:login' %}">Iniciar sesión</a>
+                                <a class="btn btn-secondary ms-2" href="{% url 'usuarios:registro' %}">Registrarse</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
