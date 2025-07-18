@@ -4,7 +4,7 @@ from .models import Videojuego, Desarrollador, Reseña
 class VideojuegoForm(forms.ModelForm):
     class Meta:
         model = Videojuego
-        fields = ['titulo', 'genero', 'consola', 'desarrollador']
+        fields = ['titulo', 'genero', 'consola', 'desarrollador','logo']
 
 class DesarrolladorForm(forms.ModelForm):
     class Meta:

@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from juegos.views import BorrarVideojuego, BorrarResena, BorrarDesarrollador
 
 app_name = 'juegos'
 
@@ -15,9 +16,9 @@ urlpatterns = [
     path('eliminar/videojuego/', views.eliminar_videojuego, name='eliminar_videojuego'),
     path('eliminar/desarrollador/', views.eliminar_desarrollador, name='eliminar_desarrollador'),
     path('eliminar/resena/', views.eliminar_resena, name='eliminar_resena'),
-    path('eliminar/videojuego/<int:id>/', views.borrar_videojuego, name='borrar_videojuego'),
-    path('eliminar/desarrollador/<int:id>/', views.borrar_desarrollador, name='borrar_desarrollador'),
-    path('eliminar/resena/<int:id>/', views.borrar_resena, name='borrar_resena'),
+    path('borrar_videojuego/<int:pk>/', BorrarVideojuego.as_view(), name='borrar_videojuego'),
+    path('borrar_desarrollador/<int:pk>/', BorrarDesarrollador.as_view(), name='borrar_desarrollador'),
+    path('borrar_resena/<int:pk>/', BorrarResena.as_view(), name='borrar_resena'),
     path('actualizar/', views.actualizar, name='actualizar'),
     path('actualizar/videojuego/', views.actualizar_videojuego, name='actualizar_videojuego'),
     path('actualizar/desarrollador/', views.actualizar_desarrollador, name='actualizar_desarrollador'),

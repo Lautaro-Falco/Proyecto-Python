@@ -5,6 +5,18 @@
 
 {% block content %}
 <div class="container mt-4 text-white">
+
+  {% if perfil.avatar %}
+    <div class="text-center mb-4">
+      <img src="{{ perfil.avatar.url }}"
+           class="rounded-circle shadow"
+           style="width: 120px; height: 120px; object-fit: cover;">
+    </div>
+  {% else %}
+    <p class="text-center text-white">Este usuario no tiene avatar</p>
+  {% endif %}
+
+
   <ul class="list-group">
     <li class="list-group-item bg-dark text-white">Nombre: {{ usuario.first_name }}</li>
     <li class="list-group-item bg-dark text-white">Apellido: {{ usuario.last_name }}</li>
@@ -13,6 +25,7 @@
     <li class="list-group-item bg-dark text-white">Usuario: {{ usuario.username }}</li>
     <li class="list-group-item bg-dark text-white">Email: {{ usuario.email }}</li>
     <a href="{% url 'usuarios:editar' %}" class="btn btn-warning px-4">Editar perfil</a>
+    <a href="{% url 'usuarios:editar_contrasenia' %}" class="btn btn-danger px-4">Editar contraseña</a>
   </ul>
 </div>
 {% endblock %}

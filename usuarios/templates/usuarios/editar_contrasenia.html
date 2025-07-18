@@ -1,13 +1,13 @@
 {% extends "base.html" %}
-{% block tittle_text %}Editar Perfil{% endblock %}
-{% block h1_text %}Editar Perfil{{ usuario.username }}{% endblock %}
-{% block p_text %}Edita tu perfil{% endblock p_text %}
+{% block tittle_text %}Editar Contraseña{% endblock %}
+{% block h1_text %}Editar Contraseña{{ usuario.username }}{% endblock %}
+{% block p_text %}Edita tu contraseña{% endblock p_text %}
 
 {% block content %}
 <div class="container mt-4 d-flex justify-content-center">
-  <form method="post" enctype="multipart/form-data" style="max-width: 500px; width: 100%;">
+  <form method="post" style="max-width: 500px; width: 100%;">
     {% csrf_token %}
-    {{ formulario.as_p }}
+    {{ form.as_p }}
     
     <div class="d-flex justify-content-center mt-3">
       <button type="submit" class="btn btn-success px-4">Guardar cambios</button>

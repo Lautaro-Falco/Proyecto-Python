@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login as django_login
 from usuarios.forms import FormularioRegistro, FormularioEdicionUsuario
 from usuarios.models import PerfilUsuario
-
+from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import PasswordChangeView
 
 def login(request):
     
@@ -24,7 +26,7 @@ def login(request):
 
 def registro(request):
     if request.method == 'POST':
-        formulario = FormularioRegistro(request.POST)
+        formulario = FormularioRegistro(request.POST, request.FILES)
         if formulario.is_valid():
           if request.method == 'POST':
             user = formulario.save(commit=False) 
@@ -38,11 +40,13 @@ def registro(request):
             
             edad = formulario.cleaned_data.get('edad')
             generofavorito = formulario.cleaned_data.get('generofavorito')
+            avatar = formulario.cleaned_data.get('avatar')
 
             PerfilUsuario.objects.create(
                 user=user,
                 edad=edad,
-                genero_favorito=generofavorito
+                genero_favorito=generofavorito,
+                avatar=avatar
             )
             return redirect('juegos:inicio')
     else:
@@ -61,24 +65,36 @@ from .forms import FormularioEdicionUsuario
 
 @login_required
 def editar_usuario(request):
-    perfil, creado = PerfilUsuario.objects.get_or_create(user=request.user)
+    perfil = request.user.perfilusuario
 
     if request.method == 'POST':
-        formulario = FormularioEdicionUsuario(request.POST, instance=request.user)
+        formulario = FormularioEdicionUsuario(request.POST, request.FILES, instance=request.user)
         if formulario.is_valid():
             usuario = formulario.save()
            
             perfil.edad = formulario.cleaned_data.get('edad')
             perfil.genero_favorito = formulario.cleaned_data.get('generofavorito')
+            perfil.avatar=formulario.cleaned_data.get('avatar')
             perfil.save()
 
             return redirect('usuarios:detalle')
     else:
         datos_iniciales = {
             'edad': perfil.edad,
-            'generofavorito': perfil.genero_favorito
+            'generofavorito': perfil.genero_favorito,
+            'avatar': perfil.avatar
         }
         formulario = FormularioEdicionUsuario(instance=request.user, initial=datos_iniciales)
 
     return render(request, 'usuarios/editar_perfil.html', {'formulario': formulario})
+
+class EditarContrasenia(LoginRequiredMixin,PasswordChangeView):
+    template_name = 'usuarios/editar_contrasenia.html'
+    success_url = reverse_lazy('usuarios:editar_perfil.html')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        for field in form.fields.values():
+            field.help_text = None
+        return form
 

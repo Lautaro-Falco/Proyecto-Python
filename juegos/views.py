@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Videojuego, Desarrollador, Reseña
 from .forms import VideojuegoForm, DesarrolladorForm, ReseñaForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import DeleteView
+from django.urls import reverse_lazy
 
 
 def inicio(request):
@@ -26,7 +29,7 @@ def listado(request):
 def cargar_videojuego(request):
     mensaje = ""
     if request.method == 'POST':
-        form = VideojuegoForm(request.POST)
+        form = VideojuegoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             mensaje = "✅ Videojuego cargado correctamente."
@@ -78,33 +81,31 @@ def eliminar_videojuego(request):
     videojuegos = Videojuego.objects.all()
     return render(request, 'juegos/eliminar_videojuego.html', {'videojuegos': videojuegos})
 
-@login_required
-def borrar_videojuego(request, id):
-    juego = Videojuego.objects.get(id=id)
-    juego.delete()
-    return redirect('juegos/eliminar_videojuego')
+
+class BorrarVideojuego(LoginRequiredMixin, DeleteView):
+    model = Videojuego
+    template_name = 'juegos/confirmar_eliminacion.html'
+    success_url = reverse_lazy('juegos:eliminar_videojuego')
 
 @login_required
 def eliminar_desarrollador(request):
     desarrolladores = Desarrollador.objects.all()
     return render(request, 'juegos/eliminar_desarrollador.html', {'desarrolladores': desarrolladores})
 
-@login_required
-def borrar_desarrollador(request, id):
-    desarrollador = Desarrollador.objects.get(id=id)
-    desarrollador.delete()
-    return redirect('juegos/eliminar_desarrollador')
+class BorrarDesarrollador(LoginRequiredMixin, DeleteView):
+    model = Desarrollador
+    template_name = 'juegos/confirmar_eliminacion.html'
+    success_url = reverse_lazy('juegos:eliminar_desarrollador')
 
 @login_required
 def eliminar_resena(request):
     resenas = Reseña.objects.all()
     return render(request, 'juegos/eliminar_resena.html', {'resenas': resenas})
 
-@login_required
-def borrar_resena(request, id):
-    resena = Reseña.objects.get(id=id)
-    resena.delete()
-    return redirect('juegos/eliminar_resena')
+class BorrarResena(LoginRequiredMixin, DeleteView):
+    model = Reseña
+    template_name = 'juegos/confirmar_eliminacion.html'
+    success_url = reverse_lazy('juegos:eliminar_resena')
 
 @login_required
 def actualizar(request):
@@ -118,7 +119,7 @@ def actualizar_videojuego(request):
 @login_required
 def editar_videojuego(request, id):
     juego = Videojuego.objects.get(id=id)
-    form = VideojuegoForm(request.POST or None, instance=juego)
+    form = VideojuegoForm(request.POST or None,request.FILES or None, instance=juego)
     if form.is_valid():
         form.save()
         return redirect('juegos:actualizar_videojuego')

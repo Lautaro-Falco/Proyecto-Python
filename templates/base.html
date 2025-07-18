@@ -42,7 +42,10 @@
                     <ul class="navbar-nav ms-auto">
                         {% if request.user.is_authenticated %}
                             <li class="nav-item d-flex align-items-center">
-                                <a class="nav-link text-white me-3 fw-bold" href="{% url 'usuarios:detalle' %}">{{ request.user.username }}</a>
+                                <a class="nav-link text-white me-3 fw-bold" href="{% url 'usuarios:detalle' %}">
+                                    <img src={{request.user.perfilusuario.avatar.url}} alt='Imagen de perfil' height= '40px'width="40px" class="rounded-circle shadow" style="object-fit: cover;">
+                                    {{ request.user.username }}
+                                </a>
                                 <form method="post" action="{% url 'usuarios:logout' %}" class="d-inline">
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-danger px-3 py-2 text-white">Cerrar sesión</button>

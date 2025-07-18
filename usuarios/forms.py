@@ -10,7 +10,7 @@ class FormularioRegistro(UserCreationForm):
     generofavorito = forms.CharField(label='Género/s Favorito/s', required=False)
     password1 = forms.CharField(label='Contrseña', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repetir contrseña', widget=forms.PasswordInput)
-    
+    avatar = forms.ImageField(required=False)
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name','edad', 'email','generofavorito','password1','password2']
@@ -26,6 +26,7 @@ class FormularioEdicionUsuario(UserChangeForm):
     last_name = forms.CharField(label='Apellido', required=False)
     edad = forms.IntegerField(label='Edad', required=False)
     generofavorito = forms.CharField(label='Género/s Favorito/s', required=False)
+    avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User

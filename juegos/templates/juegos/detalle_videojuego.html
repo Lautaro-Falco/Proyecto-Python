@@ -6,6 +6,18 @@
 
 {% block content %}
 <div class="text-white-75 mb-4">
+
+    {% if juego.logo %}
+      <div class="text-center mb-4">
+        <img src="{{ juego.logo.url }}"
+            alt="Logo de {{ juego.titulo }}"
+            class="rounded-circle shadow"
+            style="width: 120px; height: 120px; object-fit: cover;">
+      </div>
+    {% endif %}
+
+
+
     <p><strong>Género:</strong> {{ juego.genero }}</p>
     <p><strong>Desarrollador:</strong> {{ juego.desarrollador.nombre }}</p>
     <p><strong>País de desarrollo:</strong> {{ juego.desarrollador.pais }}</p>

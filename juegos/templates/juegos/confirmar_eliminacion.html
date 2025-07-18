@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block tittle_text %}Confirmacion{% endblock tittle_text %}
+{% block h1_text %}Confirmacion{% endblock h1_text %}
+{% block p_text %}{% endblock p_text %}
+{% block content %}
+  <h2>¿Estás seguro de que querés eliminar esto?</h2>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+    <a href="javascript:history.back()" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}
