@@ -10,6 +10,9 @@ from django.urls import reverse_lazy
 def inicio(request):
     return render(request, 'juegos/inicio.html')
 
+def about(request):
+    return render(request, 'juegos/about.html')
+
 @login_required
 def carga(request):
     return render(request, 'juegos/carga.html')
