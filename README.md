@@ -8,8 +8,13 @@ Este es un proyecto web desarrollado con Django como parte de la cursada de Pyth
 
 - ✅ Carga de videojuegos, desarrolladores y reseñas mediante formularios.
 - 📋 Listado completo de videojuegos con filtros por nombre, género o desarrollador.
-- ❌ Eliminación individual de cualquier videojuego, desarrollador o reseña.
-- 💡 Navegación simple con Bootstrap y diseño responsive.
+- ❌ Eliminación individual de videojuegos, desarrolladores y reseñas.
+- ✏️ Actualización de videojuegos con vistas basadas en clases (CBV).
+- 🔐 Registro, login y logout de usuarios.
+- 👤 Vista de perfil del usuario logueado.
+- 📷 Soporte de imágenes para videojuegos.
+- 📌 Página "Acerca de mí" con información del autor.
+- 💡 Navegación simple y responsive con Bootstrap.
 
 ---
 
@@ -18,6 +23,7 @@ Este es un proyecto web desarrollado con Django como parte de la cursada de Pyth
 - `Videojuego`: título, género, desarrollador, fecha de salida, puntaje.
 - `Desarrollador`: nombre y país.
 - `Reseña`: usuario, comentario y puntaje.
+- `PerfilUsuario`: usuario (OneToOne con User), avatar (imagen de perfil), descripción.
 
 ---
 
@@ -27,6 +33,8 @@ Este es un proyecto web desarrollado con Django como parte de la cursada de Pyth
 - Django 4.x
 - Bootstrap 5
 - HTML5 + CSS3
+- SQLite
+- Pillow (para imágenes)
 
 ---
 
@@ -47,16 +55,31 @@ Este es un proyecto web desarrollado con Django como parte de la cursada de Pyth
 ├── juegos/
 │   ├── templates/juegos/
 │   │   ├── base.html
+│   │   ├── inicio.html
 │   │   ├── carga.html
 │   │   ├── listado.html
 │   │   ├── eliminar_videojuego.html
 │   │   ├── eliminar_desarrollador.html
 │   │   ├── eliminar_resena.html
-│   └── views.py
-│   └── urls.py
-│   └── models.py
+│   │   ├── editar_videojuego.html
+│   │   └── acerca_de_mi.html
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── forms.py
+├── usuarios/
+│   ├── templates/usuarios/
+│   │   ├── login.html
+│   │   ├── register.html
+│   │   └── perfil.html
+│   ├── views.py
+│   ├── urls.py
+├── static/
+│   └── img/
+├── ProyectoPython/
+│   ├── settings.py
 ├── manage.py
-└── README.md
+└── requirements.txt
 ```
 ## 🧑‍💻 Autor
 
