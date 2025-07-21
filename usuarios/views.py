@@ -32,8 +32,8 @@ def registro(request):
             user = formulario.save(commit=False) 
 
             
-            user.first_name = formulario.cleaned_data['nombre']
-            user.last_name = formulario.cleaned_data['apellido']
+            user.first_name = formulario.cleaned_data['first_name']
+            user.last_name = formulario.cleaned_data['last_name']
             user.email = formulario.cleaned_data['email']
             user.save()
 
