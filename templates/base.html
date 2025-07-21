@@ -43,7 +43,9 @@
                         {% if request.user.is_authenticated %}
                             <li class="nav-item d-flex align-items-center">
                                 <a class="nav-link text-white me-3 fw-bold" href="{% url 'usuarios:detalle' %}">
-                                    <img src={{request.user.perfilusuario.avatar.url}} alt='Imagen de perfil' height= '40px'width="40px" class="rounded-circle shadow" style="object-fit: cover;">
+                                    {% if request.user.perfilusuario.avatar %}
+                                        <img src={{request.user.perfilusuario.avatar.url}} alt='Imagen de perfil' height= '40px'width="40px" class="rounded-circle shadow" style="object-fit: cover;">
+                                    {% endif %}
                                     {{ request.user.username }}
                                 </a>
                                 <form method="post" action="{% url 'usuarios:logout' %}" class="d-inline">

@@ -20,7 +20,7 @@ class FormularioRegistro(UserCreationForm):
 class FormularioEdicionUsuario(UserChangeForm):
     password = None   
 
-    username = forms.CharField(label='Nombre de usuario', required=False)
+    username = forms.CharField(label='Nombre de usuario', required=False, disabled=True)
     email = forms.EmailField(label='Correo electrónico', required=False)
     first_name = forms.CharField(label='Nombre', required=False)
     last_name = forms.CharField(label='Apellido', required=False)

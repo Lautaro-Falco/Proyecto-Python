@@ -74,7 +74,12 @@ def editar_usuario(request):
            
             perfil.edad = formulario.cleaned_data.get('edad')
             perfil.genero_favorito = formulario.cleaned_data.get('generofavorito')
-            perfil.avatar=formulario.cleaned_data.get('avatar')
+            nuevo_avatar = formulario.cleaned_data.get('avatar')
+            if nuevo_avatar:
+                perfil.avatar = nuevo_avatar
+            elif 'avatar-clear' in request.POST:
+                perfil.avatar = None
+
             perfil.save()
 
             return redirect('usuarios:detalle')
