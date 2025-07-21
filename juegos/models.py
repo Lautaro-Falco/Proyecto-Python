@@ -14,6 +14,7 @@ class Videojuego(models.Model):
     consola = models.CharField(max_length=100)
     desarrollador = models.ForeignKey(Desarrollador,  on_delete=models.SET_NULL, null=True, blank=True)
     logo = models.ImageField(upload_to='imagenes_videojuegos', blank=True, null=True)
+    fecha_lanzamiento = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.titulo
