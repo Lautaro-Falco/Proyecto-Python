@@ -90,7 +90,7 @@ def editar_usuario(request):
 
 class EditarContrasenia(LoginRequiredMixin,PasswordChangeView):
     template_name = 'usuarios/editar_contrasenia.html'
-    success_url = reverse_lazy('usuarios:editar_perfil.html')
+    success_url = reverse_lazy('usuarios:detalle')
 
     def get_form(self, form_class=None):
         form = super().get_form(form_class)
